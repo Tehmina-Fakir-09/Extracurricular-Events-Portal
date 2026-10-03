@@ -1,0 +1,172 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="College.master.cs" Inherits="College_College" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+         /* ---- Navbar ---- */
+        .main-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .auto-style1 {
+            width: 100%;
+        }
+        .auto-style2 {
+            text-align: center;
+        }
+        .auto-style3 {
+            text-align: center;
+            height: 27px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+            margin: 0;
+            padding: 0;
+        }
+        /* ---- Footer ---- */
+        .footer {
+            background: #e0e0e0;
+            color: #333;
+            width: 100%;
+            padding: 30px 0 10px 0;
+            border-top: 1px solid #ccc;
+            margin-top: auto;
+
+        }
+
+        .footer-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px 20px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            color: #222;
+            border-bottom: 2px solid #666;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .footer-column p, .footer-column a {
+            font-size: 14px;
+            color: #444;
+            text-decoration: none;
+            display: block;
+            margin: 6px 0;
+        }
+
+        .footer-column a:hover {
+            color: #007BFF;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-column {
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <table align="center" class="auto-style1">
+            <tr>
+                <td class="auto-style3"><strong>Extracurricular Events Portal</strong></td>
+                <td class="auto-style3"><strong>Welcome
+                    <asp:Label ID="Label1" runat="server"></asp:Label>
+                    </strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style2" colspan="2">
+                    <strong>
+                    <asp:Menu ID="Menu1" runat="server"  CssClass="main-menu" Orientation="Horizontal" RenderingMode="Table" Width="100%" BackColor="#666666" ForeColor="White" Height="40px">
+                        <Items>
+                            <asp:MenuItem Text="Home" Value="Home" NavigateUrl="~/College/Home.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Edit Profile" Value="Edit Profile" NavigateUrl="~/College/EditProfile.aspx"></asp:MenuItem>
+<asp:MenuItem Text="Manage Events" Value="Manage Events" NavigateUrl="~/College/ManageEvents.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="View Registrations" Value="View Registrations" NavigateUrl="~/College/ViewEventRegistrations.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="My Events" Value="My Events" NavigateUrl="~/College/ViewMyEvents.aspx"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/User/Home.aspx" Text="Logout" Value="Logout"></asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                    </strong>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+        </table>
+         <!-- Enhanced Footer -->
+            <footer class="footer">
+                <div class="footer-container">
+                    <div class="footer-column">
+                        <h3>About Portal</h3>
+                        <p>The Extracurricular Event Tracking System helps colleges post and manage events, competitions, and results seamlessly.</p>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <a href="Home.aspx">Home</a>
+                        <a href="ManageEvents.aspx">Manage Events</a>
+                        <a href="EditProfile.aspx">Edit Profile</a>
+                        <a href="ViewEventRegistrations.aspx">View registrations</a>
+
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Contact Info</h3>
+                        <p>Email: support@eventportal.com</p>
+                        <p>Phone: +91 70207 40792</p>
+                        <p>Address: Ichalkaranji, Maharashtra</p>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    © <%= DateTime.Now.Year %> Extracurricular Event Tracking System 
+                </div>
+            </footer>
+    </form>
+</body>
+</html>

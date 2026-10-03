@@ -1,0 +1,205 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="Admin_Admin" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Admin Panel</title>
+    <asp:ContentPlaceHolder id="head" runat="server"></asp:ContentPlaceHolder>
+
+    <style type="text/css">
+        /* ---- Base Styling ---- */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ---- Navbar ---- */
+        .main-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #666666;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .auto-style1 {
+            width: 100%;
+            margin-top: 50px; /* space for fixed navbar */
+        }
+
+        .auto-style3 {
+            height: 26px;
+            text-align: center;
+        }
+
+        /* ---- Reports Submenu Styling ---- */
+        .main-menu .level1 {
+            background-color: #444 !important; /* darker background for submenu */
+            border-radius: 0 0 6px 6px;
+            padding: 6px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            min-width: 180px;
+        }
+
+        /* Submenu items (Event Report, Enquiry Report) */
+        .main-menu .level1 a {
+            display: block;
+            padding: 10px 18px;
+            color: #f1f1f1 !important;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: left;
+            transition: background 0.3s ease, padding-left 0.3s ease;
+        }
+
+        /* Hover effect */
+        .main-menu .level1 a:hover {
+            background-color: #007bff !important;
+            color: #fff !important;
+            padding-left: 25px;
+        }
+
+        /* Optional: slight dropdown animation */
+        .main-menu .level1 {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all 0.25s ease;
+        }
+
+        .main-menu td:hover .level1 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---- Footer ---- */
+        .footer {
+            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+            color: #333;
+            text-align: center;
+            padding: 12px 0;
+            border-top: 1px solid #ccc;
+            font-size: 14px;
+            margin-top: auto; /* pushes footer to bottom */
+        }
+
+        .footer a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 768px) {
+            .footer {
+                font-size: 13px;
+                padding: 10px;
+            }
+        }
+        /* Dropdown submenu */
+        .main-menu .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: #2f2f2f;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+            padding: 6px 0;
+            opacity: 0;
+            transform: translateY(8px);
+            pointer-events: none;
+            transition: all 0.18s ease;
+            z-index: 2000;
+        }
+
+        /* Show submenu on hover of its parent li (desktop) */
+        .main-menu > ul > li:hover > .submenu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .main-menu .submenuItem {
+            display: block;
+            padding: 10px 18px;
+            color: #f1f1f1 !important;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: left;
+            transition: background 0.12s, padding-left 0.12s;
+        }
+
+        .main-menu .submenuItem:hover {
+            background: #007bff !important;
+            color: #fff !important;
+            padding-left: 26px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <!-- Navigation Menu -->
+            <table align="center" class="auto-style1">
+                <tr>
+                    <td class="auto-style3">
+                        <strong>
+                            <asp:Menu ID="Menu1" runat="server" CssClass="main-menu" Orientation="Horizontal" 
+                                RenderingMode="Table" Width="100%" StaticSubMenuIndent="16px"
+                                BackColor="#666666" ForeColor="White" Height="40px">
+                                <DynamicMenuStyle BackColor="#666666" />
+                                 <StaticMenuStyle CssClass="root" />
+                <StaticMenuItemStyle CssClass="rootItem" />
+                <DynamicMenuStyle CssClass="submenu" />
+                <DynamicMenuItemStyle CssClass="submenuItem" />
+                                <Items>
+                                    <asp:MenuItem Text="Home" NavigateUrl="~/Admin/Home.aspx" />
+                                    <asp:MenuItem Text="Manage Admin" NavigateUrl="~/Admin/ManageAdmin.aspx" />
+                                    <asp:MenuItem Text="Manage Colleges" NavigateUrl="~/Admin/ManageColleges.aspx" />
+                                    <asp:MenuItem Text="Manage Students" NavigateUrl="~/Admin/ManageStudents.aspx" />
+                                    <asp:MenuItem Text="Manage Events" NavigateUrl="~/Admin/ManageEvents.aspx" />
+                                    <asp:MenuItem Text="Reports">
+                                        <asp:MenuItem NavigateUrl="~/Reports/ManageEventreport.aspx" Text="Event Report" Value="Event Report"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/Reports/EnquiryReport.aspx" Text="Enquiry Report" Value="Enquiry Report"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/Reports/EventRegReport.aspx" Text="Registration Report" Value="Registration Report"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/Reports/FeedbackReport.aspx" Text="Feedback Report" Value="Feedback Report"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/Reports/CollegeRegReport.aspx" Text="College Report" Value="College Report"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/Reports/StudentRegReport.aspx" Text="Student Report" Value="Student Report"></asp:MenuItem>
+                                    </asp:MenuItem>
+                                    <asp:MenuItem Text="Logout" NavigateUrl="~/User/Home.aspx" />
+                                </Items>
+                            </asp:Menu>
+                        </strong>
+                    </td>
+                </tr>
+
+                <!-- Main Content -->
+                <tr>
+                    <td>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Footer Section -->
+            <footer class="footer">
+                © <%= DateTime.Now.Year %> Extracurricular Event Tracking System |
+                Designed & Managed by <a href="#">Admin Panel</a>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
